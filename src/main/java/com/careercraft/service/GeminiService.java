@@ -16,12 +16,23 @@ public class GeminiService {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public GeminiService(@Value("${gemini.api.url:https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent}") String apiUrl,
-                         @Value("${gemini.api.key:${GEMINI_API_KEY:}}") String apiKey) {
+                         @Value("${gemini.api.key:}") String propertyKey) {
         this.apiUrl = apiUrl;
-        this.apiKey = apiKey;
+        String envKey = System.getenv("GEMINI_API_KEY");
+        if (envKey != null && !envKey.trim().isEmpty()) {
+            this.apiKey = envKey.trim();
+        } else if (propertyKey != null && !propertyKey.trim().isEmpty()) {
+            this.apiKey = propertyKey.trim();
+        } else {
+            this.apiKey = "";
+        }
     }
 
     public String generateContent(String userInput, String systemInstruction) {
+        if (apiKey == null || apiKey.trim().isEmpty()) {
+            throw new IllegalStateException("GEMINI_API_KEY environment variable not set. Falling back to rule engine.");
+        }
+
         Map<String, Object> requestBody = Map.of(
             "systemInstruction", Map.of(
                 "parts", List.of(Map.of("text", systemInstruction))
