@@ -150,6 +150,53 @@ graph TD
 
 ---
 
+## 🎯 Oddly Specific Technical Viva Questions (Cheat Sheet)
+
+If your teacher or external examiner points at the screen or opens the IDE asking "oddly specific" code-level questions, here is exactly what to open and what to say:
+
+### 1. "Show me where the actual API call to Google Gemini happens. How are you calling it?"
+* **File to open:** `src/main/java/com/careercraft/service/GeminiService.java`
+* **What's specific about it:** Uses Java 11’s native `java.net.http.HttpClient` rather than Spring's `RestTemplate` or `WebClient`.
+* **What to say:**
+  > *"We centralized AI communication in `GeminiService`. We purposefully chose Java's native `HttpClient` instead of `WebClient` because Google’s Gemini endpoint contains a colon in the URL path (`gemini-2.5-flash:generateContent`). Spring's URL builder often encodes the colon as `%3A`, causing a 404. Native `HttpClient` sends the raw URI string cleanly via an HTTPS POST request with JSON payloads."*
+
+### 2. "How do you enforce that the AI responds in JSON rather than random markdown text?"
+* **File to open:** `src/main/java/com/careercraft/service/GeminiService.java`
+* **What to say:**
+  > *"In our request payload to Gemini, we configure `response_mime_type: application/json` inside the generation config. Additionally, our system instructions explicitly instruct the model: 'Respond with strictly valid JSON only. Do not wrap in markdown or backticks.' When the response returns, we clean any stray backticks and parse it into Java domain objects or structured JSON for the frontend."*
+
+### 3. "Show me how the Guest Limit works. How do you prevent someone from spamming 100 requests?"
+* **Files to open:** `src/main/java/com/careercraft/service/GuestLimitService.java` and `src/main/java/com/careercraft/controller/ToolController.java`
+* **What to say:**
+  > *"In `ToolController`, whenever a request hits `/api/tool/run`, we inspect `session.getAttribute(\"userId\")`. If the user is logged in, their usage is unlimited. If they are a guest (`userId == null`), we call `GuestLimitService.canRun(session)`. It increments a counter in the `HttpSession`. If the count exceeds 3, we immediately return an HTTP 403 Forbidden status, which triggers the animated signup prompt on the frontend."*
+
+### 4. "Where is the database located, and how are tables created without SQL scripts?"
+* **Files to open:** `src/main/resources/application.properties` and `src/main/java/com/careercraft/model/User.java`
+* **What to say:**
+  > *"We use an embedded H2 file database located at `./data/careercraft.mv.db`. In `application.properties`, we configured `spring.jpa.hibernate.ddl-auto=update`. When Spring Boot starts, Hibernate automatically inspects our `@Entity` classes (`User.java` and `HistoryEntry.java`) and handles the schema generation and migration automatically."*
+
+### 5. "How are passwords stored? What happens if someone inspects or steals your database file?"
+* **File to open:** `src/main/java/com/careercraft/service/UserService.java`
+* **What to say:**
+  > *"We use `BCryptPasswordEncoder` from `spring-security-crypto`. When a user registers, `passwordEncoder.encode(password)` generates a one-way cryptographic hash with an automatic random salt. When logging in, we verify credentials using `passwordEncoder.matches(raw, hash)`. Even if an attacker copies the `.mv.db` database file, the hashes cannot be reversed back to plain text."*
+
+### 6. "How does the Fallback Rule Engine work if Gemini is offline or unconfigured?"
+* **Files to open:** Any of the 5 tool services, e.g., `src/main/java/com/careercraft/service/ResumeEnhancerService.java`
+* **What to say:**
+  > *"Every single tool service has a `generateFallback()` method. If the Gemini API call throws any exception or if the API key is empty, our code catches it and switches to deterministic rules. For example, in `ResumeEnhancerService`, the fallback parses the sentence, detects passive verbs using regex, and restructures the bullet using the Google XYZ formula with strong action verbs like 'Engineered', 'Optimized', or 'Spearheaded'."*
+
+### 7. "How does the frontend communicate with the backend? Are you using React or Node?"
+* **File to open:** `src/main/resources/static/js/api.js`
+* **What to say:**
+  > *"No, we purposefully built this using vanilla JavaScript (ES6) with the native `fetch` API. This keeps the application lightweight with zero build steps or npm bundle overhead. In `api.js`, every request includes `credentials: 'same-origin'` so the browser automatically sends the session cookie with each request, keeping authentication intact across page navigations."*
+
+### 8. "How does the 'Target Role' feature connect across different tools?"
+* **File to open:** `src/main/resources/static/js/demo.js`
+* **What to say:**
+  > *"When the user enters a target job description in the drawer, we save it into the browser's `sessionStorage` under `careercraft_target_role`. Whenever they click 'Run Tool' on the Resume, LinkedIn, or Interview tools, `demo.js` automatically prepends the target role context to the prompt payload before sending it to the backend, ensuring every output matches that specific job."*
+
+---
+
 ## 📁 Project Directory Breakdown
 
 ```text
