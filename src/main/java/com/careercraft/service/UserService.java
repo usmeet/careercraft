@@ -19,17 +19,41 @@ public class UserService {
     }
 
     public User signup(SignupRequest req) {
-        if (userRepository.existsByEmail(req.getEmail())) {
+        String name = req.getName() != null ? req.getName().trim() : "Job Seeker";
+        String email = req.getEmail() != null ? req.getEmail().trim().toLowerCase() : "";
+        String rawPassword = req.getPassword() != null ? req.getPassword().trim() : "";
+
+        if (email.isEmpty() || rawPassword.isEmpty()) {
+            throw new IllegalArgumentException("Email and password cannot be empty.");
+        }
+
+        if (userRepository.existsByEmail(email)) {
             throw new IllegalArgumentException("An account with this email already exists.");
         }
-        String hashed = passwordEncoder.encode(req.getPassword());
-        User user = new User(req.getName(), req.getEmail(), hashed);
+
+        String hashed = passwordEncoder.encode(rawPassword);
+        User user = new User(name, email, hashed);
         return userRepository.save(user);
     }
 
     public Optional<User> login(String email, String password) {
-        return userRepository.findByEmail(email)
-                .filter(u -> passwordEncoder.matches(password, u.getPassword()) || u.getPassword().equals(password));
+        if (email == null || password == null) {
+            return Optional.empty();
+        }
+        String normalizedEmail = email.trim().toLowerCase();
+        String rawPassword = password.trim();
+
+        return userRepository.findByEmail(normalizedEmail)
+                .filter(u -> {
+                    String stored = u.getPassword();
+                    // Verify via BCrypt first, or plain-text as fallback
+                    try {
+                        if (passwordEncoder.matches(rawPassword, stored)) {
+                            return true;
+                        }
+                    } catch (Exception ignored) {}
+                    return stored != null && stored.equals(rawPassword);
+                });
     }
 
     public Optional<User> findById(Long id) {

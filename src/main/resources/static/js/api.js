@@ -11,6 +11,7 @@ var API = (function () {
     return fetch(BASE + path, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
       body: JSON.stringify(body)
     }).then(function (res) {
       return res.json().then(function (data) {
@@ -21,7 +22,9 @@ var API = (function () {
   }
 
   function get(path) {
-    return fetch(BASE + path).then(function (res) {
+    return fetch(BASE + path, {
+      credentials: 'same-origin'
+    }).then(function (res) {
       return res.json().then(function (data) {
         data._status = res.status;
         return data;
@@ -50,7 +53,8 @@ var API = (function () {
     },
     deleteHistory: function (id) {
       return fetch(BASE + '/history/' + id, {
-        method: 'DELETE'
+        method: 'DELETE',
+        credentials: 'same-origin'
       }).then(function (res) {
         return res.json().then(function (data) {
           data._status = res.status;
