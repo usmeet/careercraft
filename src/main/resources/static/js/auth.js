@@ -78,7 +78,7 @@
 
         var name = nameInput ? nameInput.value.trim() : '';
         var email = emailInput ? emailInput.value.trim().toLowerCase() : '';
-        var password = passwordInput ? passwordInput.value.trim() : '';
+        var password = passwordInput ? passwordInput.value : '';
 
         if (errorEl) errorEl.textContent = '';
 
@@ -105,7 +105,7 @@
         var errorEl = document.getElementById('auth-error');
 
         var email = emailInput ? emailInput.value.trim().toLowerCase() : '';
-        var password = passwordInput ? passwordInput.value.trim() : '';
+        var password = passwordInput ? passwordInput.value : '';
 
         if (errorEl) errorEl.textContent = '';
 

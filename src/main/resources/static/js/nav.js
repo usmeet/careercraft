@@ -26,15 +26,13 @@
       });
     });
 
-    /* Card mouse spotlight glow */
-    document.querySelectorAll('.card').forEach(function (card) {
-      card.addEventListener('mousemove', function (e) {
-        var rect = card.getBoundingClientRect();
-        var x = e.clientX - rect.left;
-        var y = e.clientY - rect.top;
-        card.style.setProperty('--mx', x + 'px');
-        card.style.setProperty('--my', y + 'px');
-      });
+    /* Card mouse spotlight glow — delegated so dynamic cards also work */
+    document.addEventListener('mousemove', function (e) {
+      var card = e.target.closest('.card');
+      if (!card) return;
+      var rect = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
     });
   });
 })();

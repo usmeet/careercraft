@@ -367,7 +367,7 @@
 
       resultPanel.style.display = 'none';
       resultPanel.classList.remove('try-workspace__result--visible');
-      if (noticeEl) noticeEl.style.display = 'none';
+      if (noticeEl) noticeEl.classList.remove('try-workspace__notice--visible');
     }
 
     pills.forEach(function (pill) {
@@ -426,7 +426,7 @@
           var answer = input.value.trim();
           if (!answer) { input.focus(); return; }
 
-          var questionText = decodeURIComponent(drawer.previousElementSibling.getAttribute('data-qtext') || '');
+          var questionText = decodeURIComponent(btn.closest('.variant-card').querySelector('.btn-practice').getAttribute('data-qtext') || '');
           var payload = '[QUESTION] ' + questionText + ' [ANSWER] ' + answer;
 
           var origText = btn.textContent;
@@ -472,7 +472,7 @@
         resultPanel.style.display = 'none';
         resultPanel.classList.remove('try-workspace__result--visible');
       }
-      if (noticeEl) noticeEl.style.display = 'none';
+      if (noticeEl) noticeEl.classList.remove('try-workspace__notice--visible');
 
       // Waking up server indicator if slow
       var loadingSub = document.getElementById('demo-loading-sub');
@@ -488,7 +488,7 @@
 
         if (res.error) {
           if (res._status === 403) {
-            if (noticeEl) noticeEl.style.display = 'block';
+            if (noticeEl) noticeEl.classList.add('try-workspace__notice--visible');
           } else {
             alert(res.message || 'An error occurred');
           }

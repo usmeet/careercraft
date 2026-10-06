@@ -44,7 +44,7 @@
 
 /* ---------- How it works ---------- */
 .hiw-intro{max-width:760px;margin:0 auto}
-.hiw-steps{max-width:760px;position:relative}
+.hiw-steps{max-width:760px;position:relative;margin:0 auto}
 .hiw-step{display:flex;gap:24px;align-items:flex-start;position:relative;padding-bottom:36px}
 .hiw-step:not(:last-child)::before{content:"";position:absolute;left:21px;top:44px;bottom:0;width:2px;background:linear-gradient(180deg,var(--color-signal-blue),rgba(28,108,255,.1))}
 .hiw-step__content{padding-top:8px}
@@ -82,8 +82,7 @@
 .auth-footer{margin-top:22px;text-align:center;font-size:14px;color:var(--color-fog)}
 .auth-small-print{margin-top:12px;text-align:center;font-size:12.5px;color:var(--color-mist)}
 
-/* ---------- About / History ---------- */
-.about-page{max-width:760px}
+.about-page{max-width:760px;margin:0 auto}
 .about-page p{color:var(--color-fog);line-height:1.8;margin-bottom:16px}
 .about-credits{color:var(--color-fog)}
-.history-page{max-width:820px}
+.history-page{max-width:820px;margin:0 auto}
