@@ -1,0 +1,65 @@
+{
+  "info": {
+    "name": "CareerCraft AI",
+    "description": "API endpoints for the CareerCraft AI Spring Boot backend.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Sign Up",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "http://localhost:8080/api/auth/signup", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "auth", "signup"] },
+            "body": { "mode": "raw", "raw": "{\"name\": \"Test User\", \"email\": \"test@example.com\", \"password\": \"secret123\"}" }
+          }
+        },
+        {
+          "name": "Log In",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "http://localhost:8080/api/auth/login", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "auth", "login"] },
+            "body": { "mode": "raw", "raw": "{\"email\": \"test@example.com\", \"password\": \"secret123\"}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tools",
+      "item": [
+        {
+          "name": "Run Tool (JD Decoder)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "http://localhost:8080/api/tool/run", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "tool", "run"] },
+            "body": { "mode": "raw", "raw": "{\"tool\": \"jd-decoder\", \"input\": \"Looking for a Java developer with spring boot experience in a fast paced environment.\"}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "History",
+      "item": [
+        {
+          "name": "Get History",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "http://localhost:8080/api/history", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "history"] }
+          }
+        }
+      ]
+    }
+  ]
+}

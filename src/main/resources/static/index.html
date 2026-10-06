@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerCraft AI: An AI Career Assistant for Job Seekers</title>
+  <meta name="description" content="One place to decode a job description, sharpen resume bullets, write a LinkedIn headline, research a company's values, and practice interview questions. Try it free.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;600&family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">
+      <span class="nav__logo-mark">CC</span>
+      CareerCraft AI
+    </a>
+    <div class="nav__links">
+      <a href="index.html" class="nav__link nav__link--active">Home</a>
+      <a href="try.html" class="nav__link">Try It</a>
+      <a href="how-it-works.html" class="nav__link">How It Works</a>
+    </div>
+    <div class="nav__right">
+      <a href="login.html" class="nav__login-link">Log in</a>
+      <a href="signup.html" class="btn-nav-white">Create account</a>
+      <button class="nav__toggle" aria-expanded="false" aria-label="Toggle menu">&#x2630;</button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ═══════ HERO ═══════ -->
+    <section class="hero band-canvas">
+      <div class="hero__orb" aria-hidden="true"></div>
+      <div class="hero__noise" aria-hidden="true"></div>
+
+      <p class="text-eyebrow text-blue hero__eyebrow reveal">AI CAREER ASSISTANT</p>
+      <h1 class="text-display hero__headline reveal reveal-delay-1">Your job search in one place, not five tabs</h1>
+      <p class="text-body-lg hero__subtext reveal reveal-delay-2">CareerCraft AI is an AI career assistant for job seekers. Instead of hopping between tools to decode job postings, rewrite your resume, fix your LinkedIn, and prepare for interviews, you do it all here, and each result is ready to use in an application.</p>
+      <div class="hero__cta reveal reveal-delay-3" style="margin-bottom: var(--spacing-32);">
+        <a href="try.html" class="btn-primary btn-primary--lg">Open Full Workspace</a>
+        <a href="how-it-works.html" class="btn-ghost">See how it works</a>
+      </div>
+
+      <!-- ═══ LIVE 10-SECOND HERO PREVIEW ═══ -->
+      <div class="card reveal reveal-delay-4" style="max-width: 680px; width: 100%; margin: 0 auto; padding: 20px 24px; text-align: left; background: rgba(0, 21, 51, 0.65); backdrop-filter: blur(16px); border: 1px solid rgba(28, 108, 255, 0.3); border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <span style="font-size: 12px; font-weight: 600; color: var(--color-signal-blue); text-transform: uppercase; letter-spacing: 0.8px;">⚡ Instant 5-Second Test</span>
+          <span style="font-size: 12px; color: var(--color-mist);">Google XYZ Formula</span>
+        </div>
+        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+          <input type="text" id="hero-quick-input" class="field__input" value="worked on a website for our college fest" style="font-size: 13.5px; padding: 10px 14px; flex: 1;">
+          <button id="hero-quick-btn" class="btn-primary" style="padding: 10px 18px; font-size: 13px; white-space: nowrap;">Enhance</button>
+        </div>
+        <div id="hero-quick-result" style="display: none; padding: 12px 16px; border-radius: 10px; background: rgba(0, 204, 75, 0.08); border-left: 3px solid var(--color-tag-lime); font-size: 13.5px; color: var(--color-paper-white); line-height: 1.5;">
+          <div style="font-size: 11px; color: var(--color-tag-lime); font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">Before & After Result:</div>
+          <div id="hero-quick-text"></div>
+        </div>
+      </div>
+      <div class="hero__tags">
+        <div class="tag tag--sky hero__tag" style="top: 18%; left: 8%;">JD Decoder</div>
+        <div class="tag tag--sunflower hero__tag" style="top: 28%; right: 6%;">Resume Enhancer</div>
+        <div class="tag tag--violet hero__tag" style="bottom: 35%; left: 5%;">LinkedIn Builder</div>
+        <div class="tag tag--lime hero__tag" style="bottom: 25%; right: 10%;">Culture Analyzer</div>
+        <div class="tag tag--coral hero__tag" style="top: 45%; right: 3%;">Interview Simulator</div>
+      </div>
+    </section>
+
+    <!-- ═══════ WHY ═══════ -->
+    <section class="section band-deep">
+      <div class="section__inner why-section">
+        <div class="why-section__accent" aria-hidden="true"></div>
+        <div class="why-section__content">
+          <p class="text-eyebrow text-blue reveal" style="margin-bottom: var(--spacing-24);">WHY THIS EXISTS</p>
+          <p class="text-body-lg text-fog reveal reveal-delay-1">Job hunting is scattered. Most people end up juggling five or more separate tools just to get one application ready. That tool fatigue costs time, and generic advice from one tab rarely matches what the next tab says. CareerCraft AI puts the key steps in one place so you can go from a messy job posting to application-ready material in seconds.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ TOOLS ═══════ -->
+    <section class="section band-canvas">
+      <div class="section__inner">
+        <p class="text-eyebrow text-blue text-center reveal" style="margin-bottom: var(--spacing-16);">FIVE TOOLS, ONE ASSISTANT</p>
+        <p class="text-heading text-center reveal reveal-delay-1" style="margin-bottom: var(--spacing-48); max-width: 640px; margin-left: auto; margin-right: auto;">Everything you need, in one place</p>
+        <div class="tools-section" data-stagger>
+          <div class="card tool-card">
+            <h3 class="tool-card__name">JD Decoder</h3>
+            <p class="tool-card__desc">Job postings are messy. Paste one in and the JD Decoder pulls out the must-have technical skills and flags the hidden red flags you might miss on a first read.</p>
+            <div class="well tool-card__well">Try: "Decode this JD for a fresher: We need a Python developer with REST API and cloud experience."</div>
+          </div>
+          <div class="card tool-card">
+            <h3 class="tool-card__name">Resume Enhancer</h3>
+            <p class="tool-card__desc">Weak bullets say what you did. Strong ones say what you achieved. The Resume Enhancer swaps vague wording for strong action verbs and reshapes bullets with the XYZ formula: accomplished X, as measured by Y, by doing Z.</p>
+            <div class="well tool-card__well">Try: "Improve this bullet: Worked on a website for our college fest."</div>
+          </div>
+          <div class="card tool-card">
+            <h3 class="tool-card__name">LinkedIn Builder</h3>
+            <p class="tool-card__desc">Recruiters search before they message. The LinkedIn Builder writes search-friendly headlines designed to help you show up and earn more recruiter InMail.</p>
+            <div class="well tool-card__well">Try: "Write a LinkedIn headline for a final-year engineering student interested in backend development."</div>
+          </div>
+          <div class="card tool-card">
+            <h3 class="tool-card__name">Culture Analyzer</h3>
+            <p class="tool-card__desc">Interviews go both ways. Paste in a company's stated values and the Culture Analyzer suggests reverse-interviewing questions, so you can find out whether the place fits you.</p>
+            <div class="well tool-card__well">Try: "Company values: customer obsession, ownership, bias for action. What should I ask in my interview?"</div>
+          </div>
+          <div class="card tool-card">
+            <h3 class="tool-card__name">Interview Simulator</h3>
+            <p class="tool-card__desc">Not every round is the same. The Interview Simulator sorts practice questions into Behavioral, Technical, and Case-based rounds, so you prepare for the round you will actually face.</p>
+            <div class="well tool-card__well">Try: "Give me interview questions for a junior Java developer."</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ CLOSING CTA ═══════ -->
+    <section class="section band-deep closing-cta-section">
+      <div class="section__inner closing-cta reveal">
+        <h2 class="text-heading" style="margin-bottom: var(--spacing-24);">Ready to try one?</h2>
+        <p class="text-body-lg text-fog" style="margin-bottom: var(--spacing-32);">You can run the tools as a guest, no account needed. Create a free account when you want unlimited use and a saved history.</p>
+        <div class="closing-cta__buttons">
+          <a href="try.html" class="btn-primary btn-primary--lg">Try the demo</a>
+          <a href="signup.html" class="btn-ghost">Create free account</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__links">
+        <a href="index.html" class="footer__link">Home</a>
+        <a href="try.html" class="footer__link">Try It</a>
+        <a href="how-it-works.html" class="footer__link">How It Works</a>
+        <a href="about.html" class="footer__link">About</a>
+      </div>
+      <p class="footer__copy">&copy; 2026 CareerCraft AI</p>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/reveal.js"></script>
+  <script src="js/tags.js"></script>
+  <script src="js/nav.js"></script>
+  <script>
+    (function () {
+      var btn = document.getElementById('hero-quick-btn');
+      var input = document.getElementById('hero-quick-input');
+      var resultBox = document.getElementById('hero-quick-result');
+      var textEl = document.getElementById('hero-quick-text');
+
+      if (!btn || !input) return;
+
+      btn.addEventListener('click', function () {
+        var val = input.value.trim();
+        if (!val) { input.focus(); return; }
+
+        var orig = btn.textContent;
+        btn.textContent = '...';
+        btn.disabled = true;
+
+        API.runTool('resume-enhancer', val).then(function (res) {
+          btn.textContent = orig;
+          btn.disabled = false;
+          if (res.error) {
+            alert(res.message || 'Error running demo');
+            return;
+          }
+          try {
+            var data = JSON.parse(res.result);
+            var top = (data.variants && data.variants.length) ? data.variants[0].bullet : res.result;
+            textEl.innerHTML = '<strong>' + top + '</strong>';
+          } catch (e) {
+            textEl.textContent = res.result;
+          }
+          resultBox.style.display = 'block';
+        }).catch(function () {
+          btn.textContent = orig;
+          btn.disabled = false;
+          alert('Could not connect to server.');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

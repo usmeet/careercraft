@@ -1,0 +1,428 @@
+/* ============================================================
+   components.css — Buttons, tags, cards, forms, notices
+   Source: DESIGN.md §5
+   ============================================================ */
+
+/* ---- Primary CTA Button ---- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  background-color: var(--color-signal-blue);
+  color: var(--color-paper-white);
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body);
+  line-height: 1;
+  letter-spacing: var(--tracking-body);
+  padding: var(--spacing-12) var(--spacing-20);
+  border-radius: var(--radius-buttons);
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-primary:active {
+  box-shadow: var(--shadow-pressed);
+}
+
+/* ---- Ghost Button ---- */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  background-color: transparent;
+  color: var(--color-paper-white);
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body);
+  line-height: 1;
+  letter-spacing: var(--tracking-body);
+  padding: var(--spacing-12) var(--spacing-20);
+  border-radius: var(--radius-buttons);
+  border: 1px solid var(--color-paper-white);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-ghost:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.btn-ghost:active {
+  box-shadow: var(--shadow-pressed);
+}
+
+/* Nav white button (Create account in nav) */
+.btn-nav-white {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-paper-white);
+  color: var(--surface-canvas);
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body-sm);
+  line-height: 1;
+  padding: 10px var(--spacing-16);
+  border-radius: var(--radius-buttons);
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-nav-white:hover {
+  opacity: 0.92;
+}
+
+/* ---- Category Tags ---- */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-8) var(--spacing-16);
+  border-radius: var(--radius-tags);
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-body-sm);
+  line-height: 1;
+  letter-spacing: var(--tracking-body-sm);
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* Tag colour variants — text follows D-013 contrast rules */
+.tag--coral      { background: var(--color-tag-coral);      color: var(--color-midnight-canvas); }
+.tag--lime       { background: var(--color-tag-lime);       color: var(--color-midnight-canvas); }
+.tag--tangerine  { background: var(--color-tag-tangerine);  color: var(--color-midnight-canvas); }
+.tag--hot-pink   { background: var(--color-tag-hot-pink);   color: var(--color-midnight-canvas); }
+.tag--violet     { background: var(--color-tag-violet);     color: var(--color-paper-white); }
+.tag--sunflower  { background: var(--color-tag-sunflower);  color: var(--color-midnight-canvas); }
+.tag--sky        { background: var(--color-tag-sky);        color: var(--color-midnight-canvas); }
+.tag--ember      { background: var(--color-tag-ember);      color: var(--color-midnight-canvas); }
+.tag--olive      { background: var(--color-tag-olive);      color: var(--color-midnight-canvas); }
+.tag--slate      { background: var(--color-tag-slate);      color: var(--color-paper-white); }
+
+/* ---- Neomorphic Card ---- */
+.card {
+  background-color: var(--surface-deep);
+  border-radius: var(--radius-cards);
+  padding: var(--card-padding);
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(17, 38, 59, 0.35);
+}
+
+.card--glow {
+  box-shadow: var(--shadow-glow);
+}
+
+/* ---- Form Fields ---- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.field__label {
+  font-size: var(--text-body-sm);
+  color: var(--color-fog);
+  font-weight: var(--font-weight-light);
+}
+
+.field__input {
+  background-color: var(--surface-indigo);
+  border: 1px solid var(--color-mist);
+  border-radius: var(--radius-buttons);
+  padding: var(--spacing-16);
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body);
+  color: var(--color-paper-white);
+  transition: border-color 0.15s ease, outline 0.15s ease;
+  width: 100%;
+}
+
+.field__input::placeholder {
+  color: var(--color-mist);
+  opacity: 0.7;
+}
+
+.field__input:focus {
+  outline: 2px solid var(--color-signal-blue);
+  outline-offset: 2px;
+  border-color: var(--color-signal-blue);
+}
+
+.field__error {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  font-size: var(--text-body-sm);
+  color: var(--color-tag-coral);
+}
+
+.field__error::before {
+  content: '⚠';
+  font-size: 14px;
+}
+
+/* Textarea */
+.field__textarea {
+  background-color: var(--surface-indigo);
+  border: 1px solid var(--color-mist);
+  border-radius: var(--radius-buttons);
+  padding: var(--spacing-16);
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body);
+  color: var(--color-paper-white);
+  line-height: var(--leading-body);
+  min-height: 160px;
+  resize: vertical;
+  width: 100%;
+  transition: border-color 0.15s ease, outline 0.15s ease;
+}
+
+.field__textarea::placeholder {
+  color: var(--color-mist);
+  opacity: 0.7;
+}
+
+.field__textarea:focus {
+  outline: 2px solid var(--color-signal-blue);
+  outline-offset: 2px;
+  border-color: var(--color-signal-blue);
+}
+
+/* ---- Inline Notice ---- */
+.notice {
+  background-color: var(--surface-deep);
+  border: 1px solid var(--color-steel-border);
+  border-radius: var(--radius-buttons);
+  padding: var(--card-padding);
+  color: var(--color-fog);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+}
+
+.notice--mist {
+  color: var(--color-mist);
+}
+
+.notice__actions {
+  display: flex;
+  gap: var(--spacing-12);
+  margin-top: var(--spacing-16);
+  flex-wrap: wrap;
+}
+
+/* ---- Tool selector pills (Try It) ---- */
+.pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-8) var(--spacing-20);
+  border-radius: var(--radius-pills);
+  border: 1px solid var(--color-paper-white);
+  background: transparent;
+  color: var(--color-paper-white);
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body-sm);
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+
+.pill:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.pill--active {
+  background-color: var(--color-signal-blue);
+  border-color: var(--color-signal-blue);
+  color: var(--color-paper-white);
+}
+
+.pill--active:hover {
+  background-color: var(--color-signal-blue);
+  opacity: 0.9;
+}
+
+/* ---- Example Prompt Chips ---- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-8) var(--spacing-16);
+  border-radius: var(--radius-pills);
+  background-color: var(--surface-deep);
+  color: var(--color-mist);
+  font-size: var(--text-body-sm);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  border: 1px solid rgba(17, 38, 59, 0.35);
+  text-align: left;
+}
+
+.chip:hover {
+  background-color: var(--surface-indigo);
+  color: var(--color-fog);
+}
+
+/* ---- Result Panel ---- */
+.result-panel {
+  background-color: var(--surface-indigo);
+  border-radius: var(--radius-cards);
+  box-shadow: var(--shadow-md);
+  padding: var(--card-padding);
+  border: 1px solid rgba(17, 38, 59, 0.35);
+}
+
+.result-panel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-16);
+}
+
+.result-panel__title {
+  font-size: var(--text-body-sm);
+  color: var(--color-mist);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.result-panel__body {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-light);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  color: var(--color-paper-white);
+  max-width: var(--measure);
+}
+
+.result-panel__body p + p {
+  margin-top: var(--spacing-12);
+}
+
+/* Copy button */
+.btn-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4) var(--spacing-12);
+  border-radius: var(--radius-buttons);
+  border: 1px solid var(--color-paper-white);
+  background: transparent;
+  color: var(--color-paper-white);
+  font-size: var(--text-caption);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.btn-copy:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* ---- History Entry ---- */
+.history-entry {
+  background-color: var(--surface-deep);
+  border-radius: var(--radius-cards);
+  padding: var(--card-padding);
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(17, 38, 59, 0.35);
+}
+
+.history-entry__header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  margin-bottom: var(--spacing-16);
+}
+
+.history-entry__tool-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: var(--radius-tags);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+}
+
+.history-entry__date {
+  font-size: var(--text-caption);
+  color: var(--color-mist);
+}
+
+.history-entry__input {
+  font-size: var(--text-body-sm);
+  color: var(--color-fog);
+  margin-bottom: var(--spacing-12);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: var(--leading-body-sm);
+}
+
+.history-entry__result {
+  font-size: var(--text-body);
+  color: var(--color-paper-white);
+  line-height: 1.6;
+}
+
+/* ---- Deep Surface Well (example prompts in tool cards) ---- */
+.well {
+  background-color: var(--surface-deep);
+  border-radius: var(--radius-buttons);
+  padding: var(--spacing-12) var(--spacing-16);
+  color: var(--color-mist);
+  font-size: var(--text-body-sm);
+  font-style: italic;
+  line-height: var(--leading-body-sm);
+}
+
+/* ---- Step Number ---- */
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-signal-blue);
+  color: var(--color-paper-white);
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-body-lg);
+  flex-shrink: 0;
+}
+
+/* ---- Tool card link well ---- */
+.tool-card__well {
+  background-color: var(--surface-indigo);
+  border-radius: var(--radius-buttons);
+  padding: var(--spacing-12) var(--spacing-16);
+  color: var(--color-mist);
+  font-size: var(--text-body-sm);
+  line-height: var(--leading-body-sm);
+}

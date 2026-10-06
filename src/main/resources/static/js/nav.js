@@ -1,0 +1,40 @@
+/* ============================================================
+   nav.js — Mobile navigation toggle
+   ============================================================ */
+
+(function () {
+  'use strict';
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var toggle = document.querySelector('.nav__toggle');
+    var links = document.querySelector('.nav__links');
+
+    if (!toggle || !links) return;
+
+    toggle.addEventListener('click', function () {
+      var isOpen = links.classList.toggle('nav__links--open');
+      toggle.setAttribute('aria-expanded', isOpen);
+      toggle.innerHTML = isOpen ? '&#x2715;' : '&#x2630;';
+    });
+
+    /* Close menu on link click */
+    links.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        links.classList.remove('nav__links--open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.innerHTML = '&#x2630;';
+      });
+    });
+
+    /* Card mouse spotlight glow */
+    document.querySelectorAll('.card').forEach(function (card) {
+      card.addEventListener('mousemove', function (e) {
+        var rect = card.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        var y = e.clientY - rect.top;
+        card.style.setProperty('--mx', x + 'px');
+        card.style.setProperty('--my', y + 'px');
+      });
+    });
+  });
+})();

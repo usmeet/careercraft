@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Applications & History | CareerCraft AI</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;600&family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav__logo">
+      <span class="nav__logo-mark">CC</span>
+      CareerCraft AI
+    </a>
+    <div class="nav__links">
+      <a href="index.html" class="nav__link">Home</a>
+      <a href="try.html" class="nav__link">Try It</a>
+      <a href="how-it-works.html" class="nav__link">How It Works</a>
+    </div>
+    <div class="nav__right">
+      <a href="login.html" class="nav__login-link">Log in</a>
+      <a href="signup.html" class="btn-nav-white">Create account</a>
+      <button class="nav__toggle" aria-expanded="false" aria-label="Toggle menu">&#x2630;</button>
+    </div>
+  </nav>
+
+  <main class="section band-canvas">
+    <div class="section__inner history-page">
+      <p class="text-eyebrow text-blue" style="margin-bottom: var(--spacing-16);">SAVED WORKSPACE</p>
+      <h1 class="text-heading" style="margin-bottom: var(--spacing-16);">My Applications & History</h1>
+      <p class="text-body text-fog" style="margin-bottom: var(--spacing-32);">Every result you run while logged in is preserved here. Search, copy, re-run, or remove past outputs anytime.</p>
+      
+      <!-- Search & Filters -->
+      <div id="history-controls" style="display: flex; gap: 12px; margin-bottom: var(--spacing-32); flex-wrap: wrap;">
+        <input type="text" id="history-search" class="field__input" placeholder="Search saved results or prompt keywords..." style="flex: 1; min-width: 240px; padding: 12px 16px;">
+        <select id="history-filter" class="field__input" style="width: auto; min-width: 170px; padding: 12px 16px; background-color: var(--color-deep-surface); color: var(--color-paper-white);">
+          <option value="ALL">All Tools</option>
+          <option value="JD Decoder">JD Decoder</option>
+          <option value="Resume Enhancer">Resume Enhancer</option>
+          <option value="LinkedIn Builder">LinkedIn Builder</option>
+          <option value="Culture Analyzer">Culture Analyzer</option>
+          <option value="Interview Simulator">Interview Simulator</option>
+        </select>
+      </div>
+
+      <!-- Empty state -->
+      <div id="history-empty" class="notice" style="margin-bottom: var(--spacing-40); display: none;">
+        <p>No saved applications found. Pick a tool in the workspace to generate your first result!</p>
+        <div class="notice__actions">
+          <a href="try.html" class="btn-primary">Open Workspace</a>
+        </div>
+      </div>
+
+      <!-- Dynamic entries loaded by history.js -->
+      <div id="history-list" class="history-list" style="margin-bottom: var(--spacing-40);"></div>
+
+      <p class="text-caption text-mist text-center">Your private history is stored securely and never shared with third parties.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__links">
+        <a href="index.html" class="footer__link">Home</a>
+        <a href="try.html" class="footer__link">Try It</a>
+        <a href="how-it-works.html" class="footer__link">How It Works</a>
+        <a href="about.html" class="footer__link">About</a>
+      </div>
+      <p class="footer__copy">&copy; 2026 CareerCraft AI</p>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/reveal.js"></script>
+  <script src="js/history.js"></script>
+  <script src="js/nav.js"></script>
+</body>
+</html>
