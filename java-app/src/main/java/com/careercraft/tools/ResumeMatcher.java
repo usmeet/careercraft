@@ -32,19 +32,24 @@ public class ResumeMatcher implements CareerTool {
         String resume = null;
         String jd = null;
 
-        if (input.startsWith(TARGET_TAG) && input.contains(USER_TAG)) {
+        if (input.contains(SPLIT)) {
+            String text = input;
+            if (text.startsWith(TARGET_TAG) && text.contains(USER_TAG)) {
+                int u = text.indexOf(USER_TAG);
+                text = text.substring(u + USER_TAG.length()).trim();
+            }
+            String[] parts = text.split(SPLIT, 2);
+            resume = parts[0].trim();
+            jd = parts[1].trim();
+        } else if (input.startsWith(TARGET_TAG) && input.contains(USER_TAG)) {
             int u = input.indexOf(USER_TAG);
             jd = input.substring(TARGET_TAG.length(), u).trim();
             resume = input.substring(u + USER_TAG.length()).trim();
-        } else if (input.contains(SPLIT)) {
-            String[] parts = input.split(SPLIT, 2);
-            resume = parts[0].trim();
-            jd = parts[1].trim();
         }
 
         if (resume == null || jd == null || resume.isEmpty() || jd.isEmpty()) {
-            return "{\"error\":\"Paste your resume, then a line with " + SPLIT
-                    + ", then the job description. Or set a Target JD above and paste only your resume.\"}";
+            return "{\"error\":\"Please provide both your resume and a job description. Either paste your resume, add a line with " + SPLIT
+                    + ", and paste the job description below it; or click 'Set Target JD' above and paste only your resume.\"}";
         }
         return ml.match(resume, jd);
     }

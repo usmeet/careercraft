@@ -22,8 +22,9 @@ class MatchIn(BaseModel):
 
 
 def check(text: str, label: str):
-    if not looks_like_text_block(text):
-        raise HTTPException(status_code=400, detail=f"{label} is too short (need at least 25 words).")
+    if not text or len(text.strip().split()) < 3:
+        human_label = "Resume text" if label == "resume_text" else "Job description"
+        raise HTTPException(status_code=400, detail=f"{human_label} is too short (please provide at least 3 words).")
 
 
 def roles_to_json(roles):

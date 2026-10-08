@@ -29,18 +29,34 @@ public class MlClient {
                     .body(Map.of("resume_text", resume, "job_description", jobDescription))
                     .retrieve()
                     .body(String.class);
-        } catch (HttpStatusCodeException e) {
-            // e.g. 400 "resume_text is too short" from FastAPI: pass its message through
-            return error(extractDetail(e.getResponseBodyAsString(), "The ML service rejected the request."));
+        } catch (org.springframework.web.client.RestClientResponseException e) {
+            String detail = extractDetail(e.getResponseBodyAsString(),
+                    "The ML service returned HTTP " + e.getStatusCode().value() + ". Please provide more resume and job details.");
+            return error(detail);
         } catch (RestClientException e) {
-            return error("ML service unavailable. Start it with: uvicorn api:app --port 8000");
+            return error("ML service unavailable. Start it with: python -m uvicorn api:app --port 8000");
         }
     }
 
     private String extractDetail(String body, String fallback) {
+        if (body == null || body.trim().isEmpty()) {
+            return fallback;
+        }
         try {
-            JsonNode detail = mapper.readTree(body).get("detail");
-            return (detail != null && detail.isTextual()) ? detail.asText() : fallback;
+            JsonNode node = mapper.readTree(body);
+            JsonNode detail = node.get("detail");
+            if (detail != null) {
+                if (detail.isTextual()) {
+                    return detail.asText();
+                } else if (detail.isArray() && detail.size() > 0) {
+                    JsonNode first = detail.get(0);
+                    if (first.has("msg")) {
+                        return first.get("msg").asText();
+                    }
+                    return detail.toString();
+                }
+            }
+            return fallback;
         } catch (Exception ignored) {
             return fallback;
         }
