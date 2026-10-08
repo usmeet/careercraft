@@ -1,0 +1,10 @@
+streamlit>=1.30
+# IMPORTANT: pin this to the exact version from Colab (import sklearn; print(sklearn.__version__))
+# so role_model.pkl and tfidf.pkl load without errors. Example: scikit-learn==1.6.1
+scikit-learn>=1.3
+pandas
+numpy
+joblib
+pypdf
+fastapi
+uvicorn

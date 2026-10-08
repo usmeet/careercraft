@@ -1,57 +1,51 @@
 # CareerCraft AI
 
-CareerCraft AI is an AI career assistant for job seekers. Instead of hopping between tools to decode job postings, rewrite your resume, fix your LinkedIn, and prepare for interviews, you do it all here, and each result is ready to use in an application.
+Two implementations of one idea (helping job seekers match a resume to a job), plus an integration between them.
 
-This project was built by Manasvi Sawant for the **Advanced Java Programming Lab** course.
+| | `java-app/` | `ml-service/` |
+|---|---|---|
+| Purpose | Full web app: JD Decoder, Resume Enhancer, LinkedIn Builder, Culture Analyzer, Interview Simulator | Resume role classifier and job-match bot |
+| Stack | Java 17, Spring Boot 3.2, JPA, H2/MySQL, vanilla JS, Gemini API | Python, scikit-learn (TF-IDF + Linear SVM), FastAPI, Streamlit |
+| Course | Advanced Java Programming Lab | Machine Learning mini project |
+| Built by | Manasvi Sawant | Usmeet |
 
-## Tech Stack
+## How they connect
 
-*   **Frontend**: HTML5, CSS3 (Custom Design System), Vanilla JS (No frameworks)
-*   **Backend**: Java 17, Spring Boot 3.2, Spring MVC, Spring Data JPA
-*   **Database**: H2 (In-memory for development), MySQL (For production)
-
-## Running Locally
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/your-username/careercraft-ai.git
-    cd careercraft-ai
-    ```
-
-2.  **Run with Maven:**
-    By default, the application runs using the `dev` profile which uses an in-memory H2 database. You don't need to configure MySQL to run it locally.
-    ```bash
-    mvn spring-boot:run
-    ```
-
-3.  **Access the application:**
-    Open your browser and navigate to `http://localhost:8080`.
-
-## Production Deployment
-
-To run with MySQL:
-
-1. Create a MySQL database named `careercraft`.
-2. Run the application with the `prod` profile and provide database credentials via environment variables:
-
-```bash
-export DB_HOST=localhost
-export DB_PORT=3306
-export DB_NAME=careercraft
-export DB_USER=your_user
-export DB_PASS=your_password
-export SPRING_PROFILES_ACTIVE=prod
-
-mvn spring-boot:run
+```
+Browser ──► Spring Boot (8085) ──REST/JSON──► FastAPI ML service (8000)
+             tool: resume-matcher               POST /match, /predict-role
 ```
 
-A `Dockerfile` is also included for containerized deployment.
+The Spring app treats the ML service as one more `CareerTool` (`ResumeMatcher`). Each project still runs on its own.
 
-## Project Structure
+## Run locally
 
-*   `src/main/java`: Backend source code (Controllers, Services, Models, Tools)
-*   `src/main/resources/static`: Frontend HTML, CSS, and JS files
-*   `src/main/resources/application.properties`: Configuration files
-*   `sql/`: Database schema definitions
-*   `docs/`: Syllabus mapping and other documentation
-*   `postman/`: API test collection
+### Terminal 1: ML service (FastAPI)
+```bash
+cd ml-service
+python -m uvicorn api:app --port 8000
+# or run: .\run.ps1
+# test page: http://localhost:8000/docs
+```
+
+### Terminal 2: Java app (Spring Boot)
+**Option A (IntelliJ IDEA):**
+Open `java-app` in IntelliJ IDEA and click **Run** on `CareerCraftApplication.java`.
+
+**Option B (PowerShell using bundled Maven/JDK):**
+```powershell
+cd java-app
+.\run.ps1
+# or if 'mvn' is in PATH: mvn spring-boot:run
+# web app: http://localhost:8085
+```
+
+Or run both with Docker: `docker compose up --build`
+
+## Credits
+
+The Java web app is by Manasvi Sawant. The ML model, bot and FastAPI service are by Usmeet. The ML report cites the original CareerCraft AI idea from Manasvi's Gen AI Academy deck.
+
+## Limitations
+
+See the ML project report: the 0-100 match score is a heuristic, the dataset has no AI/ML category, and matching is keyword based, not semantic.

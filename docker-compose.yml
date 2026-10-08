@@ -1,0 +1,17 @@
+# One command runs both services:  docker compose up --build
+# Put your key in a .env file next to this one:  GEMINI_API_KEY=...
+services:
+  ml-service:
+    build: ./ml-service
+    ports:
+      - "8000:8000"
+
+  java-app:
+    build: ./java-app
+    ports:
+      - "8085:8085"
+    environment:
+      ML_SERVICE_URL: http://ml-service:8000   # service name, not localhost
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+    depends_on:
+      - ml-service

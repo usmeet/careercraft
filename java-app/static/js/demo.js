@@ -54,6 +54,14 @@
         { label: 'Sample: Junior Java Developer', text: 'Junior Java & Spring Boot Developer' },
         { label: 'Sample: Fullstack Node/React', text: 'Fullstack Engineer with Node.js and React' }
       ]
+    },
+    {
+      id: 'resume-matcher',
+      name: 'Resume Match Score',
+      placeholder: 'Paste your resume. Then add a line "=====JOB DESCRIPTION=====" and paste the job description below it. (Or set a Target JD above and paste only your resume.)',
+      chips: [
+        { label: 'Sample: ML Intern vs Data Role', text: 'Machine Learning intern with strong background in Python, scikit-learn, pandas, numpy, model evaluation, data preprocessing, feature engineering, and statistical analysis. Built resume classification models and NLP pipelines.\n\n=====JOB DESCRIPTION=====\nSeeking a Data Engineer / ML Intern proficient in Python, SQL, machine learning, data pipelines, ETL, and cloud services. Experience with REST APIs and scikit-learn is a plus.' }
+      ]
     }
   ];
 
@@ -322,6 +330,33 @@
     container.style.display = 'block';
   }
 
+  function renderResumeMatcher(data) {
+    if (data.error) {
+      return '<div style="color: var(--color-fog);">' + escapeHtml(data.error) + '</div>';
+    }
+    var res = data.resume_roles && data.resume_roles[0];
+    var jd = data.jd_roles && data.jd_roles[0];
+    var html = '<div style="background: rgba(28,108,255,0.1); border: 1px solid rgba(28,108,255,0.3); border-radius: 12px; padding: 16px 20px; margin-bottom: 24px;">' +
+      '<div style="font-size: 12px; font-weight: 600; color: var(--color-signal-blue); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px;">Match score</div>' +
+      '<div style="font-size: 32px; color: var(--color-paper-white); font-weight: 600;">' + escapeHtml(String(data.score)) + '/100</div>' +
+      (res ? '<div style="margin-top: 8px; font-size: 13px; color: var(--color-fog);">Resume looks like <strong>' + escapeHtml(res.role) + '</strong> (' + Math.round(res.confidence * 100) + '%)</div>' : '') +
+      (jd ? '<div style="font-size: 13px; color: var(--color-fog);">Job looks like <strong>' + escapeHtml(jd.role) + '</strong> (' + Math.round(jd.confidence * 100) + '%) &middot; Role match: <strong>' + (data.role_match ? 'Yes' : 'No') + '</strong></div>' : '') +
+      (data.low_confidence ? '<div style="margin-top: 8px; font-size: 12px; color: var(--color-mist);">Low confidence: this resume does not fit the dataset\'s 24 categories well, so rely more on the skills below.</div>' : '') +
+      '</div>';
+
+    function chips(title, arr) {
+      if (!arr || !arr.length) return '';
+      var h = '<div style="margin-bottom: 24px;"><h4 style="font-size: 14px; color: var(--color-paper-white); margin-bottom: 10px;">' + title + '</h4><div>';
+      arr.forEach(function (s) { h += '<span class="skill-chip">' + escapeHtml(s) + '</span>'; });
+      return h + '</div></div>';
+    }
+    html += chips('✅ Skills you already show:', data.matched_skills);
+    html += chips('➕ Skills to add (in the job, not in your resume):', data.missing_skills);
+    html += chips('🔎 Other missing keywords:', data.missing_keywords);
+    html += '<div style="font-size: 12px; color: var(--color-mist);">Only add skills you really have. The score is a simple heuristic, not a hiring decision.</div>';
+    return html;
+  }
+
   /* ═══ WORKSPACE ORCHESTRATION ═══ */
 
   function initDemo() {
@@ -511,6 +546,8 @@
             renderedHtml = renderCultureAnalyzer(parsed);
           } else if (activeTool === 'interview-simulator') {
             renderedHtml = renderInterviewSimulator(parsed);
+          } else if (activeTool === 'resume-matcher') {
+            renderedHtml = renderResumeMatcher(parsed);
           } else {
             renderedHtml = '<div style="white-space: pre-wrap;">' + escapeHtml(res.result) + '</div>';
           }
